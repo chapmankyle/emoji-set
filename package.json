@@ -1,0 +1,26 @@
+{
+  "name": "emoji-set",
+  "version": "1.0.0",
+  "description": "Emoji library with functions to allow for searching by emoji, group or keyword",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chapmankyle/emoji-set.git"
+  },
+  "author": "Kyle Chapman",
+  "license": "GPL-3.0",
+  "keywords": [
+    "emoji",
+    "emojis",
+    "group",
+    "search",
+    "js"
+  ],
+  "bugs": {
+    "url": "https://github.com/chapmankyle/emoji-set/issues"
+  },
+  "homepage": "https://github.com/chapmankyle/emoji-set#readme"
+}
