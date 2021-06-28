@@ -71,11 +71,13 @@ Returns all emojis in their respective groups.
   'Smileys & Emotion': [
     {
       emoji: '😀',
+      name: 'grinning face',
       code: 'grinning_face',
       keywords: [ 'face', 'smile', 'happy', 'joy', ':D', 'grin' ]
     },
     {
       emoji: '😃',
+      name: 'grinning face with big eyes',
       code: 'grinning_face_with_big_eyes',
       keywords: [ 'face', 'happy', 'joy', 'haha', ':D', ':)', 'smile', 'funny' ]
     },
@@ -84,11 +86,13 @@ Returns all emojis in their respective groups.
   'People & Body': [
     {
       emoji: '👋',
+      name: 'waving hand',
       code: 'waving_hand',
       keywords: [ 'hands', 'gesture', 'goodbye', 'solong', 'farewell', 'hello', 'hi', 'palm' ]
     },
     {
       emoji: '🤚',
+      name: 'raised back of hand',
       code: 'raised_back_of_hand',
       keywords: [ 'fingers', 'raised', 'backhand' ]
     },
