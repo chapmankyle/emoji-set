@@ -1,6 +1,7 @@
 # emoji-set
 
 <p>
+	<img src="https://github.com/chapmankyle/emoji-set/actions/workflows/test.yml/badge.svg?branch=master" alt="Test Status">
 	<img src="https://img.shields.io/npm/v/emoji-set" alt="Version">
 	<img src="https://img.shields.io/bundlephobia/min/emoji-set" alt="Size">
 	<a href="https://standardjs.com">
