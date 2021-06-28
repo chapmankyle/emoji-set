@@ -2,13 +2,17 @@
   "name": "emoji-set",
   "version": "1.0.0",
   "description": "Emoji library with functions to allow for searching by emoji, group or keyword",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard && node tests/index.js | tap-spec"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chapmankyle/emoji-set.git"
+  },
+  "homepage": "https://github.com/chapmankyle/emoji-set#readme",
+  "bugs": {
+    "url": "https://github.com/chapmankyle/emoji-set/issues"
   },
   "author": "Kyle Chapman",
   "license": "GPL-3.0",
@@ -19,8 +23,9 @@
     "search",
     "js"
   ],
-  "bugs": {
-    "url": "https://github.com/chapmankyle/emoji-set/issues"
-  },
-  "homepage": "https://github.com/chapmankyle/emoji-set#readme"
+  "devDependencies": {
+    "standard": "^16.0.3",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.2.2"
+  }
 }
