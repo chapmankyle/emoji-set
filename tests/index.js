@@ -15,6 +15,14 @@ test('Emoji groups', function (t) {
   t.end()
 })
 
+/** Test if group search by partial or full group results in same emojis */
+test('Searching by group', function (t) {
+  const groupPartial = 'ags'
+  const groupFull = 'Flags'
+  t.equal(Object.keys(EmojiSet.searchByGroup(groupPartial)).length, Object.keys(EmojiSet.searchByGroup(groupFull)).length, 'Same emojis returned for searching by partial or full group.')
+  t.end()
+})
+
 /** Test if keyword search by partial or full keyword results in same emojis */
 test('Searching by keyword', function (t) {
   const keywordPartial = 'sco'

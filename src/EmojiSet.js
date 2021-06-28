@@ -28,6 +28,23 @@ module.exports = class EmojiSet {
   }
 
   /**
+   * Searches for emojis by a group (can be partial or a whole word).
+   * @param {string} group Group to search for associated emojis.
+   * @returns {object | null} Emojis associated with the given group, or `null` if no emojis match the group.
+   */
+  static searchByGroup (group) {
+    const lcGroup = group.toLowerCase()
+
+    for (const grp in groupedEmojis) {
+      if (grp.toLowerCase().includes(lcGroup)) {
+        return groupedEmojis[grp]
+      }
+    }
+
+    return null
+  }
+
+  /**
    * Searches for emojis by a keyword (can be partial or a whole word).
    * @param {string} keyword Keyword to use to find emojis.
    * @returns {object | null} Emojis associated with the given keyword, or `null` if no emojis match the keyword.
