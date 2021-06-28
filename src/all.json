@@ -4,12 +4,12 @@
     "code": "grinning_face",
     "group": "Smileys & Emotion",
     "keywords": [
+      "grin",
       "face",
       "smile",
       "happy",
       "joy",
-      ":D",
-      "grin"
+      ":D"
     ]
   },
   "😃": {
@@ -17,6 +17,7 @@
     "code": "grinning_face_with_big_eyes",
     "group": "Smileys & Emotion",
     "keywords": [
+      "grin",
       "face",
       "happy",
       "joy",
@@ -32,6 +33,7 @@
     "code": "grinning_face_with_smiling_eyes",
     "group": "Smileys & Emotion",
     "keywords": [
+      "grin",
       "face",
       "happy",
       "joy",
@@ -48,6 +50,7 @@
     "code": "beaming_face_with_smiling_eyes",
     "group": "Smileys & Emotion",
     "keywords": [
+      "beam",
       "face",
       "happy",
       "smile",
@@ -60,6 +63,8 @@
     "code": "grinning_squinting_face",
     "group": "Smileys & Emotion",
     "keywords": [
+      "grin",
+      "squint",
       "happy",
       "joy",
       "lol",
@@ -76,6 +81,7 @@
     "code": "grinning_face_with_sweat",
     "group": "Smileys & Emotion",
     "keywords": [
+      "grin",
       "face",
       "hot",
       "happy",
@@ -105,12 +111,13 @@
     "group": "Smileys & Emotion",
     "keywords": [
       "face",
+      "joy",
       "cry",
+      "happy",
       "tears",
       "weep",
-      "happy",
-      "happytears",
-      "haha"
+      "haha",
+      "laugh"
     ]
   },
   "🙂": {
@@ -130,7 +137,8 @@
       "face",
       "flipped",
       "silly",
-      "smile"
+      "smile",
+      "ok"
     ]
   },
   "😉": {
@@ -138,6 +146,7 @@
     "code": "winking_face",
     "group": "Smileys & Emotion",
     "keywords": [
+      "wink",
       "face",
       "happy",
       "mischievous",
@@ -159,7 +168,8 @@
       "crush",
       "embarrassed",
       "shy",
-      "joy"
+      "joy",
+      "blush"
     ]
   },
   "😇": {
@@ -211,9 +221,10 @@
     "keywords": [
       "face",
       "smile",
-      "starry",
+      "star",
       "eyes",
-      "grinning"
+      "grinning",
+      "wow"
     ]
   },
   "😘": {
@@ -321,6 +332,7 @@
     "code": "zany_face",
     "group": "Smileys & Emotion",
     "keywords": [
+      "zany",
       "face",
       "goofy",
       "crazy"
@@ -378,7 +390,8 @@
     "keywords": [
       "face",
       "quiet",
-      "shhh"
+      "shhh",
+      "shush"
     ]
   },
   "🤔": {
