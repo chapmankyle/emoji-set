@@ -50,8 +50,10 @@ module.exports = class EmojiSet {
    * @returns {object | null} Emojis associated with the given keyword, or `null` if no emojis match the keyword.
    */
   static searchByKeyword (keyword) {
+    const lcKeyword = keyword.toLowerCase()
+
     for (const key in keywordEmojis) {
-      if (key.startsWith(keyword)) {
+      if (key.startsWith(lcKeyword)) {
         return keywordEmojis[key]
       }
     }
