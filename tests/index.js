@@ -19,7 +19,10 @@ test('Emoji groups', function (t) {
 test('Searching by group', function (t) {
   const groupPartial = 'ags'
   const groupFull = 'Flags'
+
+  t.plan(2)
   t.equal(Object.keys(EmojiSet.searchByGroup(groupPartial)).length, Object.keys(EmojiSet.searchByGroup(groupFull)).length, 'Same emojis returned for searching by partial or full group.')
+  t.equal(EmojiSet.searchByGroup(groupPartial, true).length, EmojiSet.searchByGroup(groupFull, true).length, 'Same number of only emojis returned for searching by partial or full group.')
   t.end()
 })
 
