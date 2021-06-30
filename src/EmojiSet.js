@@ -30,14 +30,15 @@ module.exports = class EmojiSet {
   /**
    * Searches for emojis by a group (can be partial or a whole word).
    * @param {string} group Group to search for associated emojis.
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
    * @returns {object | null} Emojis associated with the given group, or `null` if no emojis match the group.
    */
-  static searchByGroup (group) {
+  static searchByGroup (group, onlyEmoji = false) {
     const lcGroup = group.toLowerCase()
 
     for (const grp in groupedEmojis) {
       if (grp.toLowerCase().includes(lcGroup)) {
-        return groupedEmojis[grp]
+        return onlyEmoji ? groupedEmojis[grp].map(info => info.emoji) : groupedEmojis[grp]
       }
     }
 
