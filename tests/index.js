@@ -28,8 +28,12 @@ test('Searching by group', function (t) {
 
 /** Test if keyword search by partial or full keyword results in same emojis */
 test('Searching by keyword', function (t) {
-  const keywordPartial = 'sco'
-  const keywordFull = 'score'
+  const keywordPartial = 'sc'
+  const keywordFull = 'scepticism'
+
+  t.plan(3)
   t.equal(Object.keys(EmojiSet.searchByKeyword(keywordPartial)).length, Object.keys(EmojiSet.searchByKeyword(keywordFull)).length, 'Same emojis returned for searching by partial or full keyword.')
+  t.equal(EmojiSet.searchByKeyword(keywordPartial, true, true).length, EmojiSet.searchByKeyword(keywordFull, true, true).length, 'Same number of only emojis returned for searching by partial or full keyword.')
+  t.notEqual(EmojiSet.searchByKeyword(keywordPartial, false, true).length, EmojiSet.searchByKeyword(keywordPartial, true, true).length, 'Different number of emojis returned when specifying only first match and specifying all matches.')
   t.end()
 })
