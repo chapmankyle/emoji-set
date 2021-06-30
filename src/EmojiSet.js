@@ -47,17 +47,37 @@ module.exports = class EmojiSet {
   /**
    * Searches for emojis by a keyword (can be partial or a whole word).
    * @param {string} keyword Keyword to use to find emojis.
+   * @param {boolean=} first Optional. `true` to return the first match, `false` to return all matches. Default is `true`.
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
    * @returns {object | null} Emojis associated with the given keyword, or `null` if no emojis match the keyword.
    */
-  static searchByKeyword (keyword) {
+  static searchByKeyword (keyword, first = true, onlyEmoji = false) {
     const lcKeyword = keyword.toLowerCase()
+    let results = null
 
     for (const key in keywordEmojis) {
+      const ret = onlyEmoji ? Object.keys(keywordEmojis[key]) : keywordEmojis[key]
+
       if (key.startsWith(lcKeyword)) {
-        return keywordEmojis[key]
+        // Return the first match
+        if (first) {
+          return ret
+        }
+
+        // Convert to object if no matches have been found yet
+        if (results == null) {
+          results = onlyEmoji ? [] : {}
+        }
+
+        // Check if we only want emojis or all data
+        if (onlyEmoji) {
+          results = [...results, ret].flat(1)
+        } else {
+          results = Object.assign(results, keywordEmojis[key])
+        }
       }
     }
 
-    return null
+    return results
   }
 }
