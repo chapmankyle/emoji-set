@@ -158,14 +158,15 @@ Returns all emojis associated with each keyword.
 }
 ```
 
-### `searchByGroup(group: string)`
+### `searchByGroup(group: string, onlyEmoji?: boolean | undefined)`
 Returns all emojis in the given group.
 
-Parameter given can either be a partial group name (`"smi"` for `"Smileys & Emoticon"`) or a full group name (`"smileys & emoticon"` for `"Smileys & Emoticon"`) and is ***NOT*** case-sensitive.
+- `group` : Can either be a partial group name (`"smi"` for `"Smileys & Emoticon"`) or a full group name (`"smileys & emoticon"` for `"Smileys & Emoticon"`) and is ***NOT*** case-sensitive.
+- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
 
-*Example:*
+*Examples:*
 ```js
-> EmojiSet.searchByGroup('flags')
+> EmojiSet.searchByGroup('flags', false)
 [
   {
     emoji: '🏁',
@@ -204,15 +205,21 @@ Parameter given can either be a partial group name (`"smi"` for `"Smileys & Emot
   }
 ]
 ```
+```js
+> EmojiSet.searchByGroup('flags', true)
+[ '🏁', '🚩', '🎌', '🏴', '🏳️', '🏳️‍🌈', '🏴‍☠️' ]
+```
 
-### `searchByKeyword(keyword: string)`
+### `searchByKeyword(keyword: string, first?: boolean | undefined, onlyEmoji?: boolean | undefined)`
 Returns all emojis relating to the given keyword.
 
-Parameter given can either be a partial keyword (`"perf"` for `"perfect"`) or a full keyword (`"perfect"`).
+- `keyword` : Can either be a partial keyword (`"perf"` for `"perfect"`) or a full keyword (`"perfect"`) and is ***NOT*** case sensitive.
+- `first` : Optional. `true` to return the first match, `false` to return all matches. Default is `true`.
+- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
 
-*Example:*
+*Examples:*
 ```js
-> EmojiSet.searchByKeyword('perfect')
+> EmojiSet.searchByKeyword('perf', true, false)
 {
   '💯': {
     name: 'hundred points',
@@ -225,4 +232,37 @@ Parameter given can either be a partial keyword (`"perf"` for `"perfect"`) or a 
     group: 'People & Body'
   }
 }
+```
+```js
+> EmojiSet.searchByKeyword('perf', false, false)
+{
+  '💯': {
+    name: 'hundred points',
+    code: 'hundred_points',
+    group: 'Smileys & Emotion'
+  },
+  '👌': {
+    name: 'OK hand',
+    code: 'ok_hand',
+    group: 'People & Body'
+  },
+  '👯': {
+    name: 'people with bunny ears',
+    code: 'people_with_bunny_ears',
+    group: 'People & Body'
+  },
+  '🤹': {
+    name: 'person juggling',
+    code: 'person_juggling',
+    group: 'People & Body'
+  }
+}
+```
+```js
+> EmojiSet.searchByKeyword('perf', true, true)
+[ '💯', '👌' ]
+```
+```js
+> EmojiSet.searchByKeyword('perf', false, true)
+[ '💯', '👌', '👯', '🤹' ]
 ```
