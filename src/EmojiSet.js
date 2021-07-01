@@ -23,7 +23,7 @@ module.exports = class EmojiSet {
       return groupedEmojis
     }
 
-    let result = {}
+    const result = {}
     for (const group in groupedEmojis) {
       result[group] = groupedEmojis[group].map(info => info.emoji)
     }
@@ -39,7 +39,7 @@ module.exports = class EmojiSet {
       return keywordEmojis
     }
 
-    let result = {}
+    const result = {}
     for (const keyword in keywordEmojis) {
       result[keyword] = Object.keys(keywordEmojis[keyword])
     }
