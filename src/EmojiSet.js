@@ -7,24 +7,43 @@ const keywordEmojis = require('./keywords.json')
  */
 module.exports = class EmojiSet {
   /**
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emojis, `false` to return the emojis and their information. Default is `false`.
    * @returns All of the emojis with their associated keywords.
    */
-  static getAll () {
-    return allEmojis
+  static getAll (onlyEmoji = false) {
+    return onlyEmoji ? Object.keys(allEmojis) : allEmojis
   }
 
   /**
-   * @returns Emojis grouped by their types.
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emojis, `false` to return the emojis and their information. Default is `false`.
+   * @returns {object} Emojis grouped by their types.
    */
-  static getGrouped () {
-    return groupedEmojis
+  static getGrouped (onlyEmoji = false) {
+    if (!onlyEmoji) {
+      return groupedEmojis
+    }
+
+    let result = {}
+    for (const group in groupedEmojis) {
+      result[group] = groupedEmojis[group].map(info => info.emoji)
+    }
+    return result
   }
 
   /**
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emojis, `false` to return the emojis and their information. Default is `false`.
    * @returns Emojis grouped by keywords.
    */
-  static getKeywords () {
-    return keywordEmojis
+  static getKeywords (onlyEmoji = false) {
+    if (!onlyEmoji) {
+      return keywordEmojis
+    }
+
+    let result = {}
+    for (const keyword in keywordEmojis) {
+      result[keyword] = Object.keys(keywordEmojis[keyword])
+    }
+    return result
   }
 
   /**
