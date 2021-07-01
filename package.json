@@ -1,6 +1,6 @@
 {
   "name": "emoji-set",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Emoji library with functions to allow for searching by emoji, group or keyword",
   "main": "src/index.js",
   "scripts": {
