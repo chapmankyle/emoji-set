@@ -1,12 +1,12 @@
 # emoji-set
 
 <p>
-	<img src="https://github.com/chapmankyle/emoji-set/actions/workflows/test.yml/badge.svg?branch=master" alt="Test Status">
-	<img src="https://img.shields.io/npm/v/emoji-set" alt="Version">
-	<img src="https://img.shields.io/bundlephobia/min/emoji-set" alt="Size">
-	<a href="https://standardjs.com">
-		<img src="https://img.shields.io/badge/code%20style-standard-%23f3df49" alt="Standard Code Style">
-	</a>
+    <img src="https://github.com/chapmankyle/emoji-set/actions/workflows/test.yml/badge.svg?branch=master" alt="Test Status">
+    <img src="https://img.shields.io/npm/v/emoji-set" alt="Version">
+    <img src="https://img.shields.io/bundlephobia/min/emoji-set" alt="Size">
+    <a href="https://standardjs.com">
+        <img src="https://img.shields.io/badge/code%20style-standard-%23f3df49" alt="Standard Code Style">
+    </a>
 </p>
 
 Emoji library with functions to allow for searching by emoji, group or keyword :mag:
@@ -21,23 +21,26 @@ npm install emoji-set --save
 
 ## Usage :cd:
 
-To use this package, you can import it the following ways:
+To get started, you can import the package using two methods:
 ```js
 // ES6 import
 import EmojiSet from 'emoji-set'
 
-// CommonJS import
-var EmojiSet = require('emoji-set')
+// or CommonJS import
+const EmojiSet = require('emoji-set')
 ```
 
 ## Methods :card_file_box:
 
-### `getAll()`
+### `getAll(onlyEmoji?: boolean | undefined)`
 Returns the full set of emojis available.
 
-*Example:*
+- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
+
+*Examples:*
 ```js
-> EmojiSet.getAll()
+console.log(EmojiSet.getAll())
+/* Returns */
 {
   '😀': {
     name: 'grinning face',
@@ -60,13 +63,21 @@ Returns the full set of emojis available.
   ...
 }
 ```
+```js
+console.log(EmojiSet.getAll(true))
+/* Returns */
+[ '😀', '😃', '😄', ... ]
+```
 
-### `getGrouped()`
+### `getGrouped(onlyEmoji?: boolean | undefined)`
 Returns all emojis in their respective groups.
 
-*Example:*
+- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
+
+*Examples:*
 ```js
-> EmojiSet.getGrouped()
+console.log(EmojiSet.getGrouped())
+/* Returns */
 {
   'Smileys & Emotion': [
     {
@@ -101,13 +112,25 @@ Returns all emojis in their respective groups.
   ...
 }
 ```
+```js
+console.log(EmojiSet.getGrouped(true))
+/* Returns */
+{
+  'Smileys & Emotion': [ '😀', '😃', ... ],
+  'People & Body': [ '👋', '🤚', ... ],
+  ...
+}
+```
 
-### `getKeywords()`
+### `getKeywords(onlyEmoji?: boolean | undefined)`
 Returns all emojis associated with each keyword.
 
-*Example:*
+- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
+
+*Examples:*
 ```js
-> EmojiSet.getKeywords()
+console.log(EmojiSet.getKeywords())
+/* Returns */
 {
   ...
   'playful': {
@@ -157,15 +180,27 @@ Returns all emojis associated with each keyword.
   ...
 }
 ```
+```js
+console.log(EmojiSet.getKeywords(true))
+/* Returns */
+{
+  ...
+  'playful': [ '😛', '😜', '😝', '👅' ],
+  'quiet': [ '🤫', '🔇', '🔕', '📴' ],
+  ...
+}
+```
 
-### `searchByGroup(group: string)`
+### `searchByGroup(group: string, onlyEmoji?: boolean | undefined)`
 Returns all emojis in the given group.
 
-Parameter given can either be a partial group name (`"smi"` for `"Smileys & Emoticon"`) or a full group name (`"smileys & emoticon"` for `"Smileys & Emoticon"`) and is ***NOT*** case-sensitive.
+- `group` : Can either be a partial group name (`"smi"` for `"Smileys & Emoticon"`) or a full group name (`"smileys & emoticon"` for `"Smileys & Emoticon"`) and is ***NOT*** case-sensitive.
+- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
 
-*Example:*
+*Examples:*
 ```js
-> EmojiSet.searchByGroup('flags')
+console.log(EmojiSet.searchByGroup('flags', false))
+/* Returns */
 [
   {
     emoji: '🏁',
@@ -204,15 +239,23 @@ Parameter given can either be a partial group name (`"smi"` for `"Smileys & Emot
   }
 ]
 ```
+```js
+console.log(EmojiSet.searchByGroup('flags', true))
+/* Returns */
+[ '🏁', '🚩', '🎌', '🏴', '🏳️', '🏳️‍🌈', '🏴‍☠️' ]
+```
 
-### `searchByKeyword(keyword: string)`
+### `searchByKeyword(keyword: string, first?: boolean | undefined, onlyEmoji?: boolean | undefined)`
 Returns all emojis relating to the given keyword.
 
-Parameter given can either be a partial keyword (`"perf"` for `"perfect"`) or a full keyword (`"perfect"`).
+- `keyword` : Can either be a partial keyword (`"perf"` for `"perfect"`) or a full keyword (`"perfect"`) and is ***NOT*** case sensitive.
+- `first` : Optional. `true` to return the first match, `false` to return all matches. Default is `true`.
+- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
 
-*Example:*
+*Examples:*
 ```js
-> EmojiSet.searchByKeyword('perfect')
+console.log(EmojiSet.searchByKeyword('perf', true, false))
+/* Returns */
 {
   '💯': {
     name: 'hundred points',
@@ -225,4 +268,40 @@ Parameter given can either be a partial keyword (`"perf"` for `"perfect"`) or a 
     group: 'People & Body'
   }
 }
+```
+```js
+console.log(EmojiSet.searchByKeyword('perf', false, false))
+/* Returns */
+{
+  '💯': {
+    name: 'hundred points',
+    code: 'hundred_points',
+    group: 'Smileys & Emotion'
+  },
+  '👌': {
+    name: 'OK hand',
+    code: 'ok_hand',
+    group: 'People & Body'
+  },
+  '👯': {
+    name: 'people with bunny ears',
+    code: 'people_with_bunny_ears',
+    group: 'People & Body'
+  },
+  '🤹': {
+    name: 'person juggling',
+    code: 'person_juggling',
+    group: 'People & Body'
+  }
+}
+```
+```js
+console.log(EmojiSet.searchByKeyword('perf', true, true))
+/* Returns */
+[ '💯', '👌' ]
+```
+```js
+console.log(EmojiSet.searchByKeyword('perf', false, true))
+/* Returns */
+[ '💯', '👌', '👯', '🤹' ]
 ```

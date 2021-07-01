@@ -7,37 +7,57 @@ const keywordEmojis = require('./keywords.json')
  */
 module.exports = class EmojiSet {
   /**
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emojis, `false` to return the emojis and their information. Default is `false`.
    * @returns All of the emojis with their associated keywords.
    */
-  static getAll () {
-    return allEmojis
+  static getAll (onlyEmoji = false) {
+    return onlyEmoji ? Object.keys(allEmojis) : allEmojis
   }
 
   /**
-   * @returns Emojis grouped by their types.
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emojis, `false` to return the emojis and their information. Default is `false`.
+   * @returns {object} Emojis grouped by their types.
    */
-  static getGrouped () {
-    return groupedEmojis
+  static getGrouped (onlyEmoji = false) {
+    if (!onlyEmoji) {
+      return groupedEmojis
+    }
+
+    const result = {}
+    for (const group in groupedEmojis) {
+      result[group] = groupedEmojis[group].map(info => info.emoji)
+    }
+    return result
   }
 
   /**
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emojis, `false` to return the emojis and their information. Default is `false`.
    * @returns Emojis grouped by keywords.
    */
-  static getKeywords () {
-    return keywordEmojis
+  static getKeywords (onlyEmoji = false) {
+    if (!onlyEmoji) {
+      return keywordEmojis
+    }
+
+    const result = {}
+    for (const keyword in keywordEmojis) {
+      result[keyword] = Object.keys(keywordEmojis[keyword])
+    }
+    return result
   }
 
   /**
    * Searches for emojis by a group (can be partial or a whole word).
    * @param {string} group Group to search for associated emojis.
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
    * @returns {object | null} Emojis associated with the given group, or `null` if no emojis match the group.
    */
-  static searchByGroup (group) {
+  static searchByGroup (group, onlyEmoji = false) {
     const lcGroup = group.toLowerCase()
 
     for (const grp in groupedEmojis) {
       if (grp.toLowerCase().includes(lcGroup)) {
-        return groupedEmojis[grp]
+        return onlyEmoji ? groupedEmojis[grp].map(info => info.emoji) : groupedEmojis[grp]
       }
     }
 
@@ -47,17 +67,37 @@ module.exports = class EmojiSet {
   /**
    * Searches for emojis by a keyword (can be partial or a whole word).
    * @param {string} keyword Keyword to use to find emojis.
+   * @param {boolean=} first Optional. `true` to return the first match, `false` to return all matches. Default is `true`.
+   * @param {boolean=} onlyEmoji Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
    * @returns {object | null} Emojis associated with the given keyword, or `null` if no emojis match the keyword.
    */
-  static searchByKeyword (keyword) {
+  static searchByKeyword (keyword, first = true, onlyEmoji = false) {
     const lcKeyword = keyword.toLowerCase()
+    let results = null
 
     for (const key in keywordEmojis) {
+      const ret = onlyEmoji ? Object.keys(keywordEmojis[key]) : keywordEmojis[key]
+
       if (key.startsWith(lcKeyword)) {
-        return keywordEmojis[key]
+        // Return the first match
+        if (first) {
+          return ret
+        }
+
+        // Convert to object if no matches have been found yet
+        if (results == null) {
+          results = onlyEmoji ? [] : {}
+        }
+
+        // Check if we only want emojis or all data
+        if (onlyEmoji) {
+          results = [...results, ret].flat(1)
+        } else {
+          results = Object.assign(results, keywordEmojis[key])
+        }
       }
     }
 
-    return null
+    return results
   }
 }
