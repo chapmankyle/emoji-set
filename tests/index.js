@@ -4,14 +4,30 @@ const EmojiSet = require('../src/EmojiSet')
 /** Test number of total emojis */
 test('Total emojis', function (t) {
   const correct = require('./correct.json')
+
+  t.plan(2)
   t.equal(Object.keys(EmojiSet.getAll()).length, correct.num_emojis, 'Correct number of total emojis.')
+  t.equal(typeof EmojiSet.getAll(true)[0], typeof '', 'Specifying `onlyEmoji` as true results in only emojis.')
   t.end()
 })
 
-/** Test number of emoji groups */
-test('Emoji groups', function (t) {
+/** Test emojis in each group */
+test('Emojis by group', function (t) {
   const correct = require('./correct.json')
+
+  t.plan(2)
   t.equal(Object.keys(EmojiSet.getGrouped()).length, correct.num_groups, 'Correct number of emoji groups.')
+  t.equal(typeof EmojiSet.getGrouped(true)['Smileys & Emotion'][0], typeof '', 'Specifying `onlyEmoji` as true results in only emojis for each group.')
+  t.end()
+})
+
+/** Test emojis for each keyword */
+test('Emojis by keyword', function (t) {
+  const correct = require('./correct.json')
+
+  t.plan(2)
+  t.equal(Object.keys(EmojiSet.getKeywords()).length, correct.num_keywords, 'Correct number of emoji keywords.')
+  t.equal(typeof EmojiSet.getKeywords(true).playful[0], typeof '', 'Specifying `onlyEmoji` as true results in only emojis for each keyword.')
   t.end()
 })
 
