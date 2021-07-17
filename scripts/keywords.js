@@ -1,4 +1,4 @@
-function allToKeywords() {
+function allToKeywords () {
   const allEmojis = require('../src/all.json')
   const keywords = {}
 

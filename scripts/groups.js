@@ -1,4 +1,4 @@
-function allToGroups() {
+function allToGroups () {
   const allEmojis = require('../src/all.json')
   const groups = {}
 
