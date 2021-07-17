@@ -75,11 +75,10 @@ module.exports = class EmojiSet {
     const lcKeyword = keyword.toLowerCase()
     let results = null
 
-    for (const k in keywordEmojis) {
-      const key = k.toLowerCase()
+    for (const key in keywordEmojis) {
       const ret = onlyEmoji ? Object.keys(keywordEmojis[key]) : keywordEmojis[key]
 
-      if (key.startsWith(lcKeyword)) {
+      if (key.toLowerCase().startsWith(lcKeyword)) {
         // Return the first match
         if (first) {
           return ret
