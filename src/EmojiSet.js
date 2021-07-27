@@ -78,7 +78,7 @@ module.exports = class EmojiSet {
     for (const key in keywordEmojis) {
       const ret = onlyEmoji ? Object.keys(keywordEmojis[key]) : keywordEmojis[key]
 
-      if (key.startsWith(lcKeyword)) {
+      if (key.toLowerCase().startsWith(lcKeyword)) {
         // Return the first match
         if (first) {
           return ret
