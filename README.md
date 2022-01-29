@@ -18,6 +18,8 @@ Based off emojis from [emojilib](https://github.com/muan/emojilib) and keywords 
 
 ## Install :hammer:
 
+**NB:** EmojiSet requires Node version 14 or above.
+
 ```bash
 npm install emoji-set --save
 ```
