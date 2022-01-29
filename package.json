@@ -2,10 +2,11 @@
   "name": "emoji-set",
   "version": "1.1.0",
   "description": "Emoji library with functions to allow for searching by emoji, group or keyword",
-  "main": "src/index.js",
+  "main": "dist/main.js",
   "scripts": {
+    "test": "standard && node tests/index.js | tap-spec",
     "build": "webpack",
-    "test": "standard && node tests/index.js | tap-spec"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
