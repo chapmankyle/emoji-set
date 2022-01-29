@@ -9,9 +9,12 @@
     </a>
 </p>
 
-Emoji library with functions to allow for searching by emoji, group or keyword :mag:
+Emoji library that contains only the emojis that work on most of the browsers
+and operating systems currently available :rocket: :earth_africa:
 
-Based off emojis from [emojilib](https://github.com/muan/emojilib) and keywords from [unicode-emoji-json](https://github.com/muan/unicode-emoji-json).
+Finally no more � symbols when rendering the emojis :partying_face:
+
+Based off emojis from [emojilib](https://github.com/muan/emojilib) and keywords from [unicode-emoji-json](https://github.com/muan/unicode-emoji-json)
 
 ## Install :hammer:
 
@@ -32,14 +35,23 @@ const EmojiSet = require('emoji-set')
 
 ## Methods :card_file_box:
 
-### `getAll(onlyEmoji?: boolean | undefined)`
-Returns the full set of emojis available.
+### `get(filter = {})`
 
-- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
+Returns the emojis that match the given filter. Leave the `filter` parameter blank
+to return all available emojis.
 
-*Examples:*
+Available fields for the `filter` parameter include:
+| Field | Default | Description |
+| ----- | ------- | ----------- |
+| `only_emoji` | `false` | `true` to only return the emojis, `false` to return the emojis and their information |
+| `by_section` | `false` | `true` to return the emojis grouped by their section, `false` to return the emojis without any grouping |
+| `by_keyword` | `false` | `true` to return the emojis grouped by their keywords, `false` to return the emojis without any grouping |
+
+Some examples can be seen below.
+
+#### :page_with_curl: Get all available emojis
 ```js
-console.log(EmojiSet.getAll())
+console.log(EmojiSet.get())
 /* Returns */
 {
   '😀': {
@@ -63,20 +75,17 @@ console.log(EmojiSet.getAll())
   ...
 }
 ```
+
+#### :page_with_curl: Get all available emojis without additional information
 ```js
-console.log(EmojiSet.getAll(true))
+console.log(EmojiSet.get({ only_emoji: true }))
 /* Returns */
 [ '😀', '😃', '😄', ... ]
 ```
 
-### `getGrouped(onlyEmoji?: boolean | undefined)`
-Returns all emojis in their respective groups.
-
-- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
-
-*Examples:*
+#### :page_with_curl: Get emojis grouped by their section name
 ```js
-console.log(EmojiSet.getGrouped())
+console.log(EmojiSet.get({ by_section: true }))
 /* Returns */
 {
   'Smileys & Emotion': [
@@ -112,8 +121,10 @@ console.log(EmojiSet.getGrouped())
   ...
 }
 ```
+
+#### :page_with_curl: Get emojis grouped by their section name, without additional information
 ```js
-console.log(EmojiSet.getGrouped(true))
+console.log(EmojiSet.get({ by_section: true, only_emoji: true }))
 /* Returns */
 {
   'Smileys & Emotion': [ '😀', '😃', ... ],
@@ -122,14 +133,9 @@ console.log(EmojiSet.getGrouped(true))
 }
 ```
 
-### `getKeywords(onlyEmoji?: boolean | undefined)`
-Returns all emojis associated with each keyword.
-
-- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
-
-*Examples:*
+#### :page_with_curl: Get emojis grouped by their keywords
 ```js
-console.log(EmojiSet.getKeywords())
+console.log(EmojiSet.get({ by_keywords: true }))
 /* Returns */
 {
   ...
@@ -180,8 +186,10 @@ console.log(EmojiSet.getKeywords())
   ...
 }
 ```
+
+#### :page_with_curl: Get emojis grouped by their keywords, without additional information
 ```js
-console.log(EmojiSet.getKeywords(true))
+console.log(EmojiSet.get({ by_keywords: true, only_emoji: true }))
 /* Returns */
 {
   ...
@@ -191,15 +199,23 @@ console.log(EmojiSet.getKeywords(true))
 }
 ```
 
-### `searchByGroup(group: string, onlyEmoji?: boolean | undefined)`
-Returns all emojis in the given group.
+### `search(filter = {})`
 
-- `group` : Can either be a partial group name (`"smi"` for `"Smileys & Emoticon"`) or a full group name (`"smileys & emoticon"` for `"Smileys & Emoticon"`) and is ***NOT*** case-sensitive.
-- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
+Searches for emojis using the given filter.
 
-*Examples:*
+Available fields for the `filter` parameter include:
+| Field | Default | Description |
+| ----- | ------- | ----------- |
+| `only_emoji` | `false` | `true` to only return the emojis, `false` to return the emojis and their information |
+| `by_section` | `''` | Section to return the emojis from. Some examples are: `'Objects'`, `'Animals & Nature'` etc. Value is case-insensitive |
+| `by_keyword` | `''` | Keyword to use in the emoji search. Some examples are: `'smile'`, `'tada'` etc. Value is case-insensitive |
+| `first_match` | `false` | `true` to only return the first match (when using `by_keyword`), `false` to return all matches |
+
+Some examples can be seen below.
+
+#### :page_with_curl: Search for emojis that match the given section name
 ```js
-console.log(EmojiSet.searchByGroup('flags', false))
+console.log(EmojiSet.search({ by_section: 'flags' }))
 /* Returns */
 [
   {
@@ -239,38 +255,17 @@ console.log(EmojiSet.searchByGroup('flags', false))
   }
 ]
 ```
+
+#### :page_with_curl: Search for emojis that match the given section name, without additional information
 ```js
-console.log(EmojiSet.searchByGroup('flags', true))
+console.log(EmojiSet.search({ by_section: 'flags', only_emoji: true }))
 /* Returns */
 [ '🏁', '🚩', '🎌', '🏴', '🏳️', '🏳️‍🌈', '🏴‍☠️' ]
 ```
 
-### `searchByKeyword(keyword: string, first?: boolean | undefined, onlyEmoji?: boolean | undefined)`
-Returns all emojis relating to the given keyword.
-
-- `keyword` : Can either be a partial keyword (`"perf"` for `"perfect"`) or a full keyword (`"perfect"`) and is ***NOT*** case sensitive.
-- `first` : Optional. `true` to return the first match, `false` to return all matches. Default is `true`.
-- `onlyEmoji` : Optional. `true` to only return the emoji, `false` to return all information as well as the emoji. Default is `false`.
-
-*Examples:*
+#### :page_with_curl: Search for emojis that match the given keyword
 ```js
-console.log(EmojiSet.searchByKeyword('perf', true, false))
-/* Returns */
-{
-  '💯': {
-    name: 'hundred points',
-    code: 'hundred_points',
-    group: 'Smileys & Emotion'
-  },
-  '👌': {
-    name: 'OK hand',
-    code: 'ok_hand',
-    group: 'People & Body'
-  }
-}
-```
-```js
-console.log(EmojiSet.searchByKeyword('perf', false, false))
+console.log(EmojiSet.search({ by_keyword: 'perf' }))
 /* Returns */
 {
   '💯': {
@@ -295,13 +290,23 @@ console.log(EmojiSet.searchByKeyword('perf', false, false))
   }
 }
 ```
+
+#### :page_with_curl: Search for emojis that match the given keyword, returning the first match only
 ```js
-console.log(EmojiSet.searchByKeyword('perf', true, true))
+console.log(EmojiSet.search({ by_keyword: 'perf', first_match: true }))
 /* Returns */
-[ '💯', '👌' ]
+{
+  '💯': {
+    name: 'hundred points',
+    code: 'hundred_points',
+    group: 'Smileys & Emotion'
+  }
+}
 ```
+
+#### :page_with_curl: Search for emojis that match the given keyword, returning the first match only and without any additional information
 ```js
-console.log(EmojiSet.searchByKeyword('perf', false, true))
+console.log(EmojiSet.search({ by_keyword: 'perf', first_match: true, only_emoji: true }))
 /* Returns */
-[ '💯', '👌', '👯', '🤹' ]
+[ '💯' ]
 ```
